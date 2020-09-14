@@ -2,8 +2,8 @@
 
 A react date range picker implementation using @material-ui.
 
-<a href='https://www.npmjs.com/package/materialui-daterange-picker'>
-    <img src='https://img.shields.io/npm/v/materialui-daterange-picker.svg' alt='Latest npm version'>
+<a href='https://www.npmjs.com/package/material-ui-i18n-daterange-picker'>
+    <img src='https://img.shields.io/npm/v/material-ui-i18n-daterange-picker.svg' alt='Latest npm version'>
 </a>
 
 ## Preview
@@ -69,14 +69,23 @@ Name | Type | Required | Default value | Description
 `onChange` | `(DateRange) => void` | _required_ | - | handler function for providing selected date range
 `toggle` | `() => void` | _required_ | - | function to show / hide the DateRangePicker
 `initialDateRange` | `DateRange` | _optional_ | `{}` | initially selected date range
-`minDate` | `Date` or `string` | _optional_ | 10 years ago | min date allowed in range
-`maxDate` | `Date` or `string` | _optional_ | 10 years from now | max date allowed in range
+`minDate` | `Date` | _optional_ | 10 years ago | min date allowed in range
+`maxDate` | `Date` | _optional_ | 10 years from now | max date allowed in range
+`locale` | `Locale` | _optional_ | enGB | the locale for date calculation
 `definedRanges` | `DefinedRange[]` | _optional_ | - | custom defined ranges to show in the list
 `closeOnClickOutside` | `boolean` | _optional_ | `true` | defines if DateRangePicker will be closed when clicking outside of it
 `wrapperClassName` | `object` | _optional_ | `undefined` | defines additional wrapper style classes
 
 ## Made possible by
 
-<a href="https://github.com/jungsoft/materialui-daterange-picker/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=jungsoft/materialui-daterange-picker" />
+<a href="https://github.com/ochronus/materialui-daterange-picker/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=ochronus/materialui-daterange-picker" />
 </a>
+
+## Changelog
+###v1.2.1
+The concept (and prop!) of locale was introduced. See [https://date-fns.org/v2.16.1/docs/Locale](https://date-fns.org/v2.16.1/docs/Locale)
+
+###v1.2.0
+Dependencies upgraded
+

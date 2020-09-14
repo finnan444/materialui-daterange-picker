@@ -34,8 +34,8 @@ export interface DateRangePickerWrapperProps {
   toggle: () => void;
   initialDateRange?: DateRange;
   definedRanges?: DefinedRange[];
-  minDate?: Date | string;
-  maxDate?: Date | string;
+  minDate?: Date;
+  maxDate?: Date;
   onChange: (dateRange: DateRange) => void;
   closeOnClickOutside?: boolean;
   wrapperClassName?: string;
