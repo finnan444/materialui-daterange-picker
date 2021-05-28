@@ -1,0 +1,68 @@
+{
+  "version": "0.3.4",
+  "name": "@finnan444/material-ui-daterange-picker",
+  "author": "finnan444",
+  "description": "A react date range picker implementation using @material-ui.",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint --fix",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "module": "dist/material-ui-daterange-picker.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/material-ui-daterange-picker.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/material-ui-daterange-picker.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.11.0",
+    "@types/react": "^17.0.8",
+    "@types/react-dom": "^17.0.5",
+    "husky": "^6.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "size-limit": "^4.11.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.2.0",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "classnames": "^2.3.1",
+    "date-fns": "^2.22.0"
+  }
+}
