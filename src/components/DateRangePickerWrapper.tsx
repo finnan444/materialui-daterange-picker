@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core';
 import DateRangePicker from './DateRangePicker';
 
 import { DateRange, DefinedRange } from '../types';
+import { Locale } from 'date-fns';
 
 const useStyles = makeStyles(() => ({
   dateRangePickerContainer: {
@@ -36,6 +37,7 @@ export interface DateRangePickerWrapperProps {
   onChange: (dateRange: DateRange) => void;
   closeOnClickOutside?: boolean;
   wrapperClassName?: string;
+  locale?: Locale;
 }
 
 const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProps> = (

@@ -79,6 +79,7 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
           prevDisabled={!back}
           onClickPrevious={() => handlers.onMonthNavigate(marker, NavigationAction.Previous)}
           onClickNext={() => handlers.onMonthNavigate(marker, NavigationAction.Next)}
+          locale={locale}
         />
 
         <Grid
