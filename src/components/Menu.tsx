@@ -4,6 +4,7 @@ import {
   Grid,
   makeStyles,
   Paper,
+  PopoverProps,
   Theme,
   Typography,
 } from '@material-ui/core';
@@ -52,6 +53,7 @@ interface MenuProps {
     onDayHover: (day: Date) => void;
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
+  popoverProps?: Partial<PopoverProps>;
 }
 
 const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
@@ -70,6 +72,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     setDateRange,
     helpers,
     handlers,
+    popoverProps,
   } = props;
 
   const { startDate, endDate } = dateRange;
@@ -83,7 +86,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     handlers,
   };
   return (
-    <Paper elevation={5} square>
+    <Paper {...popoverProps}>
       <Grid container direction="row" wrap="nowrap">
         <Grid>
           <Grid container className={classes.header} alignItems="center">

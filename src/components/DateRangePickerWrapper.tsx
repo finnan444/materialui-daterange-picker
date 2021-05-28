@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, PopoverProps } from '@material-ui/core';
 
 import DateRangePicker from './DateRangePicker';
 
@@ -37,7 +37,25 @@ export interface DateRangePickerWrapperProps {
   onChange: (dateRange: DateRange) => void;
   closeOnClickOutside?: boolean;
   wrapperClassName?: string;
+  /**
+   * The date-fns locale object to localize the user interface. Defaults to
+   * `enGB`.
+   */
   locale?: Locale;
+  /**
+   * popoverProps applied to main Popover component
+   */
+  popoverProps?: Partial<PopoverProps>;
+  /**
+   * Show the outside days.  An outside day is a day falling in the next or the
+   * previous month. Default is `false`.
+   */
+  showOutsideDays?: boolean;
+  /**
+   * Display six weeks per months, regardless the month’s number of weeks.
+   * To use this prop, [[showOutsideDays]] must be set. Default to `false`.
+   */
+  fixedWeeks?: boolean;
 }
 
 const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProps> = (

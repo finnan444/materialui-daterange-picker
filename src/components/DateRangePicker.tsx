@@ -23,6 +23,7 @@ import { getValidatedMonths, parseOptionalDate } from '../utils';
 import { defaultRanges } from '../defaults';
 
 import Menu, { Marker, MARKERS } from './Menu';
+import { PopoverProps } from '@material-ui/core';
 
 interface DateRangePickerProps {
   open: boolean;
@@ -32,6 +33,7 @@ interface DateRangePickerProps {
   maxDate?: Date;
   locale?: Locale;
   onChange: (dateRange: DateRange) => void;
+  popoverProps?: Partial<PopoverProps>;
 }
 
 const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
@@ -48,6 +50,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
     minDate,
     maxDate,
     definedRanges = defaultRanges(locale ?? enGB),
+    popoverProps,
   } = props;
 
   const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
@@ -173,6 +176,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
       setDateRange={setDateRangeValidated}
       helpers={helpers}
       handlers={handlers}
+      popoverProps={popoverProps}
     />
   ) : null;
 };
