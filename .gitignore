@@ -28,3 +28,6 @@ package/README.md
 
 *.log
 .cache
+
+.idea
+.vscode
