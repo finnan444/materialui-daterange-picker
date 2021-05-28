@@ -2,31 +2,27 @@
 
 A react date range picker implementation using @material-ui.
 
-<a href='https://www.npmjs.com/package/material-ui-i18n-daterange-picker'>
-    <img src='https://img.shields.io/npm/v/material-ui-i18n-daterange-picker.svg' alt='Latest npm version'>
+<a href='https://www.npmjs.com/package/@finnan444/material-ui-daterange-picker'>
+    <img src='https://img.shields.io/npm/v/@finnan444/material-ui-daterange-picker.svg' alt='Latest npm version'>
 </a>
 
 ## Preview
 
 ![Screenshot](/screenshot.png?raw=true "Screenshot")
 
-## Live Demo
-
-Check out the project running [here](https://codesandbox.io/s/materialui-daterange-picker-2p3f1?file=/src/App.js)!
-
 ## Usage
 
 ```bash
-npm install materialui-daterange-picker --save
+npm i @finnan444/material-ui-daterange-picker
 
 # or with yarn
-yarn add materialui-daterange-picker
+yarn add @finnan444/material-ui-daterange-picker
 ```
 
 ## Basic example
 ```tsx
 import React from "react";
-import { DateRangePicker, DateRange } from "materialui-daterange-picker";
+import { DateRangePicker, DateRange } from '@finnan444/material-ui-daterange-picker';
 
 type Props = {}
 
@@ -76,16 +72,4 @@ Name | Type | Required | Default value | Description
 `closeOnClickOutside` | `boolean` | _optional_ | `true` | defines if DateRangePicker will be closed when clicking outside of it
 `wrapperClassName` | `object` | _optional_ | `undefined` | defines additional wrapper style classes
 
-## Made possible by
-
-<a href="https://github.com/ochronus/materialui-daterange-picker/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=ochronus/materialui-daterange-picker" />
-</a>
-
-## Changelog
-###v1.2.1
-The concept (and prop!) of locale was introduced. See [https://date-fns.org/v2.16.1/docs/Locale](https://date-fns.org/v2.16.1/docs/Locale)
-
-###v1.2.0
-Dependencies upgraded
 

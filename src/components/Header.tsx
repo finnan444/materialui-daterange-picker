@@ -10,12 +10,7 @@ import {
 import React from 'react';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
-import {
-  setMonth,
-  getMonth,
-  setYear,
-  getYear,
-} from 'date-fns';
+import { setMonth, getMonth, setYear, getYear } from 'date-fns';
 
 const useStyles = makeStyles(() => ({
   iconContainer: {
@@ -70,12 +65,12 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 }: HeaderProps) => {
   const classes = useStyles();
 
-  const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setDate(setMonth(date, parseInt(event.target.value)));
+  const handleMonthChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setDate(setMonth(date, parseInt(event.target.value as string)));
   };
 
-  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setDate(setYear(date, parseInt(event.target.value)));
+  const handleYearChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setDate(setYear(date, parseInt(event.target.value as string)));
   };
 
   return (
@@ -109,17 +104,21 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           onChange={handleYearChange}
           MenuProps={{ disablePortal: true }}
         >
-          {generateYears(date, 30).map((year) => (
+          {generateYears(date, 30).map(year => (
             <MenuItem key={year} value={year}>
               {year}
             </MenuItem>
           ))}
         </Select>
 
-        {/* <Typography>{format(date, "MMMM YYYY")}</Typography> */}
+        {/* <Typography>{format(date, "MMMM yyyy")}</Typography> */}
       </Grid>
       <Grid item className={classes.iconContainer}>
-        <IconButton className={classes.icon} disabled={nextDisabled} onClick={onClickNext}>
+        <IconButton
+          className={classes.icon}
+          disabled={nextDisabled}
+          onClick={onClickNext}
+        >
           <ChevronRight color={nextDisabled ? 'disabled' : 'action'} />
         </IconButton>
       </Grid>

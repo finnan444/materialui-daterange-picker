@@ -1,13 +1,7 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 
 import * as React from 'react';
-import {
-  IconButton,
-  Typography,
-  makeStyles,
-  // eslint-disable-next-line no-unused-vars
-  Theme,
-} from '@material-ui/core';
+import { IconButton, Typography, makeStyles, Theme } from '@material-ui/core';
 import { combine } from '../utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -76,14 +70,14 @@ const Day: React.FunctionComponent<DayProps> = ({
         classes.buttonContainer,
         startOfRange && classes.leftBorderRadius,
         endOfRange && classes.rightBorderRadius,
-        !disabled && highlighted && classes.highlighted,
+        !disabled && highlighted && classes.highlighted
       )}
     >
       <IconButton
         className={combine(
           classes.button,
           !disabled && outlined && classes.outlined,
-          !disabled && filled && classes.filled,
+          !disabled && filled && classes.filled
         )}
         disabled={disabled}
         onClick={onClick}
@@ -93,7 +87,7 @@ const Day: React.FunctionComponent<DayProps> = ({
           color={!disabled ? 'textPrimary' : 'textSecondary'}
           className={combine(
             classes.buttonText,
-            !disabled && filled && classes.contrast,
+            !disabled && filled && classes.contrast
           )}
           variant="body2"
         >

@@ -20,7 +20,7 @@ export default function generateClassName(rule: any, sheet: any) {
       [
         'Material-UI: you might have a memory leak.',
         'The ruleCounter is not supposed to grow that much.',
-      ].join(''),
+      ].join('')
     );
   }
 
