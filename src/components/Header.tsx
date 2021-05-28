@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
-import { setMonth, getMonth, setYear, getYear } from 'date-fns';
+import { setMonth, getMonth, setYear, getYear, Locale } from 'date-fns';
 
 const useStyles = makeStyles(() => ({
   iconContainer: {
@@ -31,22 +31,8 @@ interface HeaderProps {
   prevDisabled: boolean;
   onClickNext: () => void;
   onClickPrevious: () => void;
+  locale: Locale;
 }
-
-const MONTHS = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'June',
-  'July',
-  'Aug',
-  'Sept',
-  'Oct',
-  'Nov',
-  'Dec',
-];
 
 const generateYears = (relativeTo: Date, count: number) => {
   const half = Math.floor(count / 2);
@@ -62,16 +48,25 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   prevDisabled,
   onClickNext,
   onClickPrevious,
+  locale,
 }: HeaderProps) => {
-  const classes = useStyles();
+  const generateMonths = (): any[] => {
+    const months = [];
+    for (let i = 0; i < 12; i++) {
+      months.push(locale.localize?.month(i, { width: 'abbreviated' }));
+    }
+
+    return months;
+  };
 
   const handleMonthChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setDate(setMonth(date, parseInt(event.target.value as string)));
   };
-
   const handleYearChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setDate(setYear(date, parseInt(event.target.value as string)));
   };
+
+  const classes = useStyles();
 
   return (
     <Grid container justify="space-between" alignItems="center">
@@ -90,7 +85,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           onChange={handleMonthChange}
           MenuProps={{ disablePortal: true }}
         >
-          {MONTHS.map((month, idx) => (
+          {generateMonths().map((month, idx) => (
             <MenuItem key={month} value={idx}>
               {month}
             </MenuItem>
