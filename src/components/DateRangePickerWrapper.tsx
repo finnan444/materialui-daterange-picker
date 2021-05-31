@@ -47,6 +47,16 @@ export interface DateRangePickerWrapperProps {
    */
   popoverProps?: Partial<PopoverProps>;
   /**
+   * Text for start toolbar placeholder.
+   * @default 'Start'
+   */
+  startText?: React.ReactNode;
+  /**
+   * Text for end toolbar placeholder.
+   * @default 'End'
+   */
+  endText?: React.ReactNode;
+  /**
    * Show the outside days.  An outside day is a day falling in the next or the
    * previous month. Default is `false`.
    */

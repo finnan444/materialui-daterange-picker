@@ -54,11 +54,11 @@ interface MenuProps {
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
   popoverProps?: Partial<PopoverProps>;
+  startText?: React.ReactNode;
+  endText?: React.ReactNode;
 }
 
 const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
-  const classes = useStyles();
-
   const {
     ranges,
     dateRange,
@@ -73,6 +73,8 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     helpers,
     handlers,
     popoverProps,
+    startText,
+    endText,
   } = props;
 
   const { startDate, endDate } = dateRange;
@@ -85,6 +87,11 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     helpers,
     handlers,
   };
+
+  const headerDateFormat: string = 'MMMM dd, yyyy';
+
+  const classes = useStyles();
+
   return (
     <Paper {...popoverProps}>
       <Grid container direction="row" wrap="nowrap">
@@ -92,7 +99,9 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
           <Grid container className={classes.header} alignItems="center">
             <Grid item className={classes.headerItem}>
               <Typography variant="subtitle1">
-                {startDate ? format(startDate, 'MMMM dd, yyyy') : 'Start Date'}
+                {startDate
+                  ? format(startDate, headerDateFormat)
+                  : startText ?? 'Start'}
               </Typography>
             </Grid>
             <Grid item className={classes.headerItem}>
@@ -100,7 +109,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
             </Grid>
             <Grid item className={classes.headerItem}>
               <Typography variant="subtitle1">
-                {endDate ? format(endDate, 'MMMM dd, yyyy') : 'End Date'}
+                {endDate ? format(endDate, headerDateFormat) : endText ?? 'End'}
               </Typography>
             </Grid>
           </Grid>
