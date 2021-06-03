@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import {
+  addDays,
   format,
   getDate,
   isSameMonth,
   isToday,
   isWithinInterval,
   Locale,
+  startOfWeek,
 } from 'date-fns';
 import {
   chunks,
@@ -96,7 +98,7 @@ export const Month: React.FunctionComponent<MonthProps> = (
           locale={locale}
         />
 
-        <WeekDayNames locale={locale} />
+        <WeekDayNames locale={locale} date={date} weekStartsOn={weekStartsOn} />
 
         <Grid
           item
@@ -142,25 +144,22 @@ export const Month: React.FunctionComponent<MonthProps> = (
   );
 };
 
-// TODO how to connect with startOfWeek property?
-const generateWeekDays = (locale: Locale): any[] => {
-  if (locale.localize) {
-    return [...Array(7).keys()].map(i =>
-      locale.localize?.day(i, { width: 'abbreviated' })
-    );
-  }
-
-  return ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-};
-
 type WeekDayNamesProps = {
   locale: Locale;
+  date: Date;
+  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 };
 
 const WeekDayNames: React.FunctionComponent<WeekDayNamesProps> = props => {
-  const { locale } = props;
+  const { locale, date, weekStartsOn } = props;
 
-  const weekdays = generateWeekDays(locale);
+  const firstDateOfWeek = startOfWeek(date, {
+    locale: locale,
+    weekStartsOn: weekStartsOn,
+  });
+  const shortWeekDaysArray = Array.from(Array(7)).map((_e, i) =>
+    format(addDays(firstDateOfWeek, i), 'EEEEEE')
+  );
 
   const classes = useStyles();
 
@@ -172,8 +171,8 @@ const WeekDayNames: React.FunctionComponent<WeekDayNamesProps> = props => {
       justify="space-between"
       className={classes.weekDaysContainer}
     >
-      {weekdays.map(day => (
-        <Typography color="textSecondary" key={day} variant="caption">
+      {shortWeekDaysArray.map(day => (
+        <Typography key={day} color="textSecondary" variant="caption">
           {day}
         </Typography>
       ))}

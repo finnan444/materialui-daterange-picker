@@ -22,6 +22,9 @@ module.exports = {
       {
         "allowExpressions": true
       }
-    ]
+    ],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'error',
+    'react/jsx-key': 'error',
   }
 }

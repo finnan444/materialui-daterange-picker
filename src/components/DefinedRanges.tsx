@@ -10,7 +10,7 @@ type DefinedRangesProps = {
   ranges: DefinedRange[];
 };
 
-const isSameRange = (first: DateRange, second: DateRange) => {
+const isSameRange = (first: DateRange, second: DateRange): boolean => {
   const { startDate: fStart, endDate: fEnd } = first;
   const { startDate: sStart, endDate: sEnd } = second;
   if (fStart && sStart && fEnd && sEnd) {
