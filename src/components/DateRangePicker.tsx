@@ -34,6 +34,7 @@ interface DateRangePickerProps {
   locale?: Locale;
   onChange: (dateRange: DateRange) => void;
   popoverProps?: Partial<PopoverProps>;
+  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
@@ -51,6 +52,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
     maxDate,
     definedRanges = defaultRanges(locale ?? enGB),
     popoverProps,
+    weekStartsOn,
   } = props;
 
   const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
@@ -177,6 +179,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
       helpers={helpers}
       handlers={handlers}
       popoverProps={popoverProps}
+      weekStartsOn={weekStartsOn}
     />
   ) : null;
 };

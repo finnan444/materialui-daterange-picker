@@ -68,7 +68,9 @@ export interface DateRangePickerWrapperProps {
    */
   //TODO
   fixedWeeks?: boolean;
-  //TODO
+  /** The index of the first day of the week (0 - Sunday)
+   * @param {0|1|2|3|4|5|6}
+   */
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }
 

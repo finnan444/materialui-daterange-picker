@@ -56,6 +56,7 @@ interface MenuProps {
   popoverProps?: Partial<PopoverProps>;
   startText?: React.ReactNode;
   endText?: React.ReactNode;
+  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
@@ -75,6 +76,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     popoverProps,
     startText,
     endText,
+    weekStartsOn,
   } = props;
 
   const { startDate, endDate } = dateRange;
@@ -122,6 +124,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
               setValue={setFirstMonth}
               navState={[true, canNavigateCloser]}
               marker={MARKERS.FIRST_MONTH}
+              weekStartsOn={weekStartsOn}
             />
             <div className={classes.divider} />
             <Month
@@ -131,6 +134,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
               setValue={setSecondMonth}
               navState={[canNavigateCloser, true]}
               marker={MARKERS.SECOND_MONTH}
+              weekStartsOn={weekStartsOn}
             />
           </Grid>
         </Grid>
