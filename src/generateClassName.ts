@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 // Returns a function which generates unique class names based on counters.
 // When new generator function is created, rule counter is reset.
 // We need to reset the rule counter for SSR for each request.
@@ -7,12 +5,17 @@
 // Copied from material-ui due to issue https://github.com/callemall/material-ui/issues/8223
 
 // This counter is moved outside from `generateClassName` to solve the issue
+import { Rule, StyleSheet } from 'jss';
+
 let ruleCounter = 0;
 
 // Adds a prefix to all generated class names, to avoid conflict with other Material UI instances.
-const prefix = 'materialui-daterange-picker';
+const prefix = 'material-ui-daterange-picker';
 
-export default function generateClassName(rule: any, sheet: any) {
+export default function generateClassName(
+  rule: Rule,
+  sheet?: StyleSheet<string>
+): string {
   ruleCounter += 1;
 
   if (ruleCounter > 1e10) {
