@@ -75,19 +75,19 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
   const { startDate, endDate } = dateRange;
 
   // handlers
-  const setFirstMonthValidated = (date: Date) => {
+  const setFirstMonthValidated = (date: Date): void => {
     if (isBefore(date, secondMonth)) {
       setFirstMonth(date);
     }
   };
 
-  const setSecondMonthValidated = (date: Date) => {
+  const setSecondMonthValidated = (date: Date): void => {
     if (isAfter(date, firstMonth)) {
       setSecondMonth(date);
     }
   };
 
-  const setDateRangeValidated = (range: DateRange) => {
+  const setDateRangeValidated = (range: DateRange): void => {
     let { startDate: newStart, endDate: newEnd } = range;
 
     if (newStart && newEnd) {
@@ -112,7 +112,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
     }
   };
 
-  const onDayClick = (day: Date) => {
+  const onDayClick = (day: Date): void => {
     if (startDate && !endDate && !isBefore(day, startDate)) {
       const newRange = { startDate, endDate: day };
       onChange(newRange);
@@ -123,7 +123,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
     setHoverDay(day);
   };
 
-  const onMonthNavigate = (marker: Marker, action: NavigationAction) => {
+  const onMonthNavigate = (marker: Marker, action: NavigationAction): void => {
     if (marker === MARKERS.FIRST_MONTH) {
       const firstNew = addMonths(firstMonth, action);
       if (isBefore(firstNew, secondMonth)) setFirstMonth(firstNew);
@@ -133,7 +133,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
     }
   };
 
-  const onDayHover = (date: Date) => {
+  const onDayHover = (date: Date): void => {
     if (startDate && !endDate) {
       if (!hoverDay || !isSameDay(date, hoverDay)) {
         setHoverDay(date);
@@ -142,7 +142,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
   };
 
   // helpers
-  const inHoverRange = (day: Date) =>
+  const inHoverRange = (day: Date): boolean =>
     (startDate &&
       !endDate &&
       hoverDay &&

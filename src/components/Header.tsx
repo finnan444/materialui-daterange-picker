@@ -34,7 +34,7 @@ interface HeaderProps {
   locale: Locale;
 }
 
-const generateYears = (relativeTo: Date, count: number) => {
+const generateYears = (relativeTo: Date, count: number): number[] => {
   const half = Math.floor(count / 2);
   return Array(count)
     .fill(0)
@@ -59,10 +59,14 @@ const Header: React.FunctionComponent<HeaderProps> = ({
     return months;
   };
 
-  const handleMonthChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleMonthChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ): void => {
     setDate(setMonth(date, parseInt(event.target.value as string)));
   };
-  const handleYearChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleYearChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ): void => {
     setDate(setYear(date, parseInt(event.target.value as string)));
   };
 

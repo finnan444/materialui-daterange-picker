@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { differenceInCalendarMonths, format, Locale } from 'date-fns';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
-import Month from './Month';
+import { Month } from './Month';
 import DefinedRanges from './DefinedRanges';
 import { DateRange, DefinedRange, NavigationAction, Setter } from '../types';
 
@@ -88,7 +88,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     handlers,
   };
 
-  const headerDateFormat: string = 'MMMM dd, yyyy';
+  const headerDateFormat = 'MMMM dd, yyyy';
 
   const classes = useStyles();
 

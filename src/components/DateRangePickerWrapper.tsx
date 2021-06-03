@@ -60,12 +60,16 @@ export interface DateRangePickerWrapperProps {
    * Show the outside days.  An outside day is a day falling in the next or the
    * previous month. Default is `false`.
    */
+  //TODO
   showOutsideDays?: boolean;
   /**
    * Display six weeks per months, regardless the month’s number of weeks.
    * To use this prop, [[showOutsideDays]] must be set. Default to `false`.
    */
+  //TODO
   fixedWeeks?: boolean;
+  //TODO
+  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProps> = (
@@ -75,7 +79,7 @@ const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProp
 
   const { closeOnClickOutside, wrapperClassName, toggle, open } = props;
 
-  const handleToggle = () => {
+  const handleToggle = (): void => {
     if (closeOnClickOutside === false) {
       return;
     }
@@ -83,8 +87,11 @@ const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProp
     toggle();
   };
 
-  const handleKeyPress = (event: any) =>
-    event?.key === 'Escape' && handleToggle();
+  const handleKeyPress = (event: React.KeyboardEvent): void => {
+    if (event.key && event.key === 'Escape') {
+      handleToggle();
+    }
+  };
 
   const wrapperClasses = classNames(classes.dateRangePicker, wrapperClassName);
 

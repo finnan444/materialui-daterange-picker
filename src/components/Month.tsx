@@ -1,19 +1,25 @@
 import * as React from 'react';
+import { Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import {
-  Grid, makeStyles, Paper, Typography,
-} from '@material-ui/core';
-import {
-  format, getDate, isSameMonth, isToday, isWithinInterval, Locale,
+  format,
+  getDate,
+  isSameMonth,
+  isToday,
+  isWithinInterval,
+  Locale,
 } from 'date-fns';
 import {
-  chunks, getDaysInMonth, inDateRange, isEndOfRange, isRangeSameDay, isStartOfRange,
+  chunks,
+  getDaysInMonth,
+  inDateRange,
+  isEndOfRange,
+  isRangeSameDay,
+  isStartOfRange,
 } from '../utils';
 import Header from './Header';
 import Day from './Day';
 
 import { DateRange, NavigationAction } from '../types';
-
-const WEEK_DAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -33,27 +39,28 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface MonthProps {
-    value: Date;
-    marker: symbol;
-    dateRange: DateRange;
-    minDate: Date;
-    maxDate: Date;
-    locale: Locale;
-    navState: [boolean, boolean];
-    setValue: (date: Date) => void;
-    helpers: {
-        inHoverRange: (day: Date) => boolean;
-    };
-    handlers: {
-        onDayClick: (day: Date) => void;
-        onDayHover: (day: Date) => void;
-        onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
-    };
+  value: Date;
+  marker: symbol;
+  dateRange: DateRange;
+  minDate: Date;
+  maxDate: Date;
+  locale: Locale;
+  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  navState: [boolean, boolean];
+  setValue: (date: Date) => void;
+  helpers: {
+    inHoverRange: (day: Date) => boolean;
+  };
+  handlers: {
+    onDayClick: (day: Date) => void;
+    onDayHover: (day: Date) => void;
+    onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
+  };
 }
 
-const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
-  const classes = useStyles();
-
+export const Month: React.FunctionComponent<MonthProps> = (
+  props: MonthProps
+) => {
   const {
     helpers,
     handlers,
@@ -65,9 +72,12 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
     minDate,
     maxDate,
     navState,
+    weekStartsOn,
   } = props;
 
   const [back, forward] = navState;
+
+  const classes = useStyles();
 
   return (
     <Paper square elevation={0} className={classes.root}>
@@ -77,24 +87,16 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
           setDate={setDate}
           nextDisabled={!forward}
           prevDisabled={!back}
-          onClickPrevious={() => handlers.onMonthNavigate(marker, NavigationAction.Previous)}
-          onClickNext={() => handlers.onMonthNavigate(marker, NavigationAction.Next)}
+          onClickPrevious={() =>
+            handlers.onMonthNavigate(marker, NavigationAction.Previous)
+          }
+          onClickNext={() =>
+            handlers.onMonthNavigate(marker, NavigationAction.Next)
+          }
           locale={locale}
         />
 
-        <Grid
-          item
-          container
-          direction="row"
-          justify="space-between"
-          className={classes.weekDaysContainer}
-        >
-          {WEEK_DAYS.map((day) => (
-            <Typography color="textSecondary" key={day} variant="caption">
-              {day}
-            </Typography>
-          ))}
-        </Grid>
+        <WeekDayNames locale={locale} />
 
         <Grid
           item
@@ -103,39 +105,78 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
           justify="space-between"
           className={classes.daysContainer}
         >
-          {chunks(getDaysInMonth(date, locale), 7).map((week, idx) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Grid key={idx} container direction="row" justify="center">
-              {week.map((day) => {
-                const isStart = isStartOfRange(dateRange, day);
-                const isEnd = isEndOfRange(dateRange, day);
-                const isRangeOneDay = isRangeSameDay(dateRange);
-                const highlighted = inDateRange(dateRange, day) || helpers.inHoverRange(day);
+          {chunks(getDaysInMonth(date, locale, weekStartsOn), 7).map(
+            (week, idx) => (
+              <Grid key={idx} container direction="row" justify="center">
+                {week.map(day => {
+                  const isStart = isStartOfRange(dateRange, day);
+                  const isEnd = isEndOfRange(dateRange, day);
+                  const isRangeOneDay = isRangeSameDay(dateRange);
+                  const highlighted =
+                    inDateRange(dateRange, day) || helpers.inHoverRange(day);
 
-                return (
-                  <Day
-                    key={format(day, 'MM-dd-yyyy')}
-                    filled={isStart || isEnd}
-                    outlined={isToday(day)}
-                    highlighted={highlighted && !isRangeOneDay}
-                    disabled={
-                      !isSameMonth(date, day)
-                                            || !isWithinInterval(day, { start: minDate, end: maxDate })
-                    }
-                    startOfRange={isStart && !isRangeOneDay}
-                    endOfRange={isEnd && !isRangeOneDay}
-                    onClick={() => handlers.onDayClick(day)}
-                    onHover={() => handlers.onDayHover(day)}
-                    value={getDate(day)}
-                  />
-                );
-              })}
-            </Grid>
-          ))}
+                  return (
+                    <Day
+                      key={format(day, 'MM-dd-yyyy')}
+                      filled={isStart || isEnd}
+                      outlined={isToday(day)}
+                      highlighted={highlighted && !isRangeOneDay}
+                      disabled={
+                        !isSameMonth(date, day) ||
+                        !isWithinInterval(day, { start: minDate, end: maxDate })
+                      }
+                      startOfRange={isStart && !isRangeOneDay}
+                      endOfRange={isEnd && !isRangeOneDay}
+                      onClick={() => handlers.onDayClick(day)}
+                      onHover={() => handlers.onDayHover(day)}
+                      value={getDate(day)}
+                    />
+                  );
+                })}
+              </Grid>
+            )
+          )}
         </Grid>
       </Grid>
     </Paper>
   );
 };
 
-export default Month;
+// TODO how to connect with startOfWeek property?
+const generateWeekDays = (locale: Locale): any[] => {
+  if (locale.localize) {
+    return [...Array(7).keys()].map(i =>
+      locale.localize?.day(i, { width: 'abbreviated' })
+    );
+  }
+
+  return ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+};
+
+type WeekDayNamesProps = {
+  locale: Locale;
+};
+
+const WeekDayNames: React.FunctionComponent<WeekDayNamesProps> = props => {
+  const { locale } = props;
+
+  const weekdays = generateWeekDays(locale);
+
+  const classes = useStyles();
+
+  return (
+    <Grid
+      item
+      container
+      direction="row"
+      justify="space-between"
+      className={classes.weekDaysContainer}
+    >
+      {weekdays.map(day => (
+        <Typography color="textSecondary" key={day} variant="caption">
+          {day}
+        </Typography>
+      ))}
+    </Grid>
+  );
+};
