@@ -71,7 +71,8 @@ const Header: React.FC<HeaderProps> = props => {
     setDate(setYear(date, parseInt(event.target.value as string)));
   };
 
-  const domRef = React.createRef<any>();
+  const monthSelectRef = React.createRef<any>();
+  const yearSelectRef = React.createRef<any>();
 
   const classes = useStyles();
 
@@ -87,12 +88,11 @@ const Header: React.FC<HeaderProps> = props => {
         </IconButton>
       </Grid>
       <Grid item>
-        <RootRef rootRef={domRef}>
+        <RootRef rootRef={monthSelectRef}>
           <Select
             value={getMonth(date)}
             onChange={handleMonthChange}
-            // MenuProps={{ disablePortal: true }}
-            MenuProps={{ container: domRef.current }}
+            MenuProps={{ container: monthSelectRef.current }}
           >
             {generateMonths().map((month, idx) => (
               <MenuItem key={month} value={idx}>
@@ -104,17 +104,19 @@ const Header: React.FC<HeaderProps> = props => {
       </Grid>
 
       <Grid item>
-        <Select
-          value={getYear(date)}
-          onChange={handleYearChange}
-          MenuProps={{ disablePortal: true }}
-        >
-          {generateYears(date, 30).map(year => (
-            <MenuItem key={year} value={year}>
-              {year}
-            </MenuItem>
-          ))}
-        </Select>
+        <RootRef rootRef={yearSelectRef}>
+          <Select
+            value={getYear(date)}
+            onChange={handleYearChange}
+            MenuProps={{ container: yearSelectRef.current }}
+          >
+            {generateYears(date, 30).map(year => (
+              <MenuItem key={year} value={year}>
+                {year}
+              </MenuItem>
+            ))}
+          </Select>
+        </RootRef>
       </Grid>
       <Grid item className={classes.iconContainer}>
         <IconButton
