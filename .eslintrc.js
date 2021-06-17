@@ -16,6 +16,8 @@ module.exports = {
     "react/prop-types": "off",
     "import/prefer-default-export": "off",
     "no-use-before-define": "off",
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": ["error"],
     "@typescript-eslint/no-use-before-define": ["error"],
     "@typescript-eslint/explicit-function-return-type": [
       "error",

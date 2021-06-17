@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
 
 export interface DateRangePickerWrapperProps {
   open: boolean;
-  toggle: () => void;
+  onToggle?: () => void;
   initialDateRange?: DateRange;
   definedRanges?: DefinedRange[];
   minDate?: Date;
@@ -81,14 +81,16 @@ export interface DateRangePickerWrapperProps {
 const DateRangePickerWrapper: React.FC<DateRangePickerWrapperProps> = props => {
   const classes = useStyles();
 
-  const { closeOnClickOutside, wrapperClassName, toggle, open } = props;
+  const { closeOnClickOutside, wrapperClassName, onToggle, open } = props;
 
   const handleToggle = (): void => {
     if (closeOnClickOutside === false) {
       return;
     }
 
-    toggle();
+    if (onToggle) {
+      onToggle();
+    }
   };
 
   const handleKeyPress = (event: React.KeyboardEvent): void => {

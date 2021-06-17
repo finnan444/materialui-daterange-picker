@@ -87,7 +87,19 @@ const Header: React.FC<HeaderProps> = props => {
         <Select
           value={getMonth(date)}
           onChange={handleMonthChange}
-          MenuProps={{ disablePortal: true }}
+          // MenuProps={{ disablePortal: true }}
+          MenuProps={{
+            disablePortal: true,
+            // anchorOrigin: {
+            //   vertical: 'bottom',
+            //   horizontal: 'left',
+            // },
+            // transformOrigin: {
+            //   vertical: 'top',
+            //   horizontal: 'left',
+            // },
+            getContentAnchorEl: null,
+          }}
         >
           {generateMonths().map((month, idx) => (
             <MenuItem key={month} value={idx}>

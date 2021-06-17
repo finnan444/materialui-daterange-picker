@@ -1,37 +1,31 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import DateRangePickerExporter from '../src/components/DateRangePickerExporter';
-import { DateRange } from '../src';
+import { DateRangeCard } from './components/DateRangeCard';
+import { Button, Popper } from '@material-ui/core';
+import { useRef, useState } from 'react';
 
-const App = () => {
-  const toggle = () => {};
+const App: React.FC = () => {
+  const [open, setOpen] = useState(false);
 
-  const handleRangeSelect = (range: DateRange) => {
-    if (range) {
-      console.log(range);
-    }
-  };
+  const handleToggle = (): void => setOpen(prevOpen => !prevOpen);
+  const handleClose = (): void => setOpen(false);
 
-  const minDate = new Date();
-  minDate.setDate(minDate.getDate() - 7);
+  const buttonAnchorRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <div>
-      <DateRangePickerExporter
-        open
-        closeOnClickOutside={false}
-        toggle={toggle}
-        onChange={handleRangeSelect}
-        // initialDateRange={defaultSelected}
-        popoverProps={{
-          elevation: 0,
-        }}
-        minDate={minDate}
-        showOutsideDays
-        fixedWeeks
-      />
-    </div>
+    <React.Fragment>
+      <Button ref={buttonAnchorRef} onClick={handleToggle} variant="contained">
+        Open Me
+      </Button>
+      <Popper
+        open={open}
+        anchorEl={buttonAnchorRef.current}
+        placement="bottom-start"
+      >
+        <DateRangeCard onClose={handleClose} />
+      </Popper>
+    </React.Fragment>
   );
 };
 
