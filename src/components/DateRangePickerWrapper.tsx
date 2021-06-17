@@ -60,7 +60,6 @@ export interface DateRangePickerWrapperProps {
    * Show the outside days.  An outside day is a day falling in the next or the
    * previous month. Default is `false`.
    */
-  //TODO
   showOutsideDays?: boolean;
   /**
    * Display six weeks per months, regardless the month’s number of weeks.

@@ -57,6 +57,7 @@ interface MenuProps {
   startText?: React.ReactNode;
   endText?: React.ReactNode;
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  showOutsideDays: boolean;
 }
 
 const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
@@ -77,6 +78,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     startText,
     endText,
     weekStartsOn,
+    showOutsideDays,
   } = props;
 
   const { startDate, endDate } = dateRange;
@@ -90,6 +92,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     handlers,
   };
 
+  // TODO
   const headerDateFormat = 'MMMM dd, yyyy';
 
   const classes = useStyles();
@@ -125,6 +128,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
               navState={[true, canNavigateCloser]}
               marker={MARKERS.FIRST_MONTH}
               weekStartsOn={weekStartsOn}
+              showOutsideDays={showOutsideDays}
             />
             <div className={classes.divider} />
             <Month
@@ -135,6 +139,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
               navState={[canNavigateCloser, true]}
               marker={MARKERS.SECOND_MONTH}
               weekStartsOn={weekStartsOn}
+              showOutsideDays={showOutsideDays}
             />
           </Grid>
         </Grid>

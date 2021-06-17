@@ -24,11 +24,11 @@ const App = () => {
         toggle={toggle}
         onChange={handleRangeSelect}
         // initialDateRange={defaultSelected}
-        // locale={enGB}
         popoverProps={{
           elevation: 0,
         }}
         minDate={minDate}
+        showOutsideDays
       />
     </div>
   );

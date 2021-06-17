@@ -44,6 +44,7 @@ interface DayProps {
   outlined?: boolean;
   highlighted?: boolean;
   disabled?: boolean;
+  hidden?: boolean;
   startOfRange?: boolean;
   endOfRange?: boolean;
   onClick?: () => void;
@@ -51,17 +52,20 @@ interface DayProps {
   value: number | string;
 }
 
-const Day: React.FunctionComponent<DayProps> = ({
-  startOfRange,
-  endOfRange,
-  disabled,
-  highlighted,
-  outlined,
-  filled,
-  onClick,
-  onHover,
-  value,
-}: DayProps) => {
+const Day: React.FunctionComponent<DayProps> = (props: DayProps) => {
+  const {
+    startOfRange,
+    endOfRange,
+    disabled,
+    highlighted,
+    outlined,
+    filled,
+    onClick,
+    onHover,
+    value,
+    hidden,
+  } = props;
+
   const classes = useStyles();
 
   return (
@@ -90,6 +94,7 @@ const Day: React.FunctionComponent<DayProps> = ({
             !disabled && filled && classes.contrast
           )}
           variant="body2"
+          hidden={hidden}
         >
           {value}
         </Typography>

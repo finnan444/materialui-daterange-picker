@@ -48,6 +48,7 @@ interface MonthProps {
   maxDate: Date;
   locale: Locale;
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  showOutsideDays: boolean;
   navState: [boolean, boolean];
   setValue: (date: Date) => void;
   helpers: {
@@ -75,6 +76,7 @@ export const Month: React.FunctionComponent<MonthProps> = (
     maxDate,
     navState,
     weekStartsOn,
+    showOutsideDays,
   } = props;
 
   const [back, forward] = navState;
@@ -127,6 +129,7 @@ export const Month: React.FunctionComponent<MonthProps> = (
                         !isSameMonth(date, day) ||
                         !isWithinInterval(day, { start: minDate, end: maxDate })
                       }
+                      hidden={!showOutsideDays && !isSameMonth(date, day)}
                       startOfRange={isStart && !isRangeOneDay}
                       endOfRange={isEnd && !isRangeOneDay}
                       onClick={() => handlers.onDayClick(day)}
