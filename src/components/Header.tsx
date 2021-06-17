@@ -4,6 +4,7 @@ import {
   IconButton,
   Select,
   MenuItem,
+  RootRef,
 } from '@material-ui/core';
 import React from 'react';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
@@ -70,6 +71,8 @@ const Header: React.FC<HeaderProps> = props => {
     setDate(setYear(date, parseInt(event.target.value as string)));
   };
 
+  const domRef = React.createRef();
+
   const classes = useStyles();
 
   return (
@@ -84,29 +87,20 @@ const Header: React.FC<HeaderProps> = props => {
         </IconButton>
       </Grid>
       <Grid item>
-        <Select
-          value={getMonth(date)}
-          onChange={handleMonthChange}
-          MenuProps={{ disablePortal: true }}
-          // MenuProps={{
-          //   // disablePortal: true,
-          //   anchorOrigin: {
-          //     vertical: 'bottom',
-          //     horizontal: 'left',
-          //   },
-          //   transformOrigin: {
-          //     vertical: 'top',
-          //     horizontal: 'left',
-          //   },
-          //   getContentAnchorEl: null,
-          // }}
-        >
-          {generateMonths().map((month, idx) => (
-            <MenuItem key={month} value={idx}>
-              {month}
-            </MenuItem>
-          ))}
-        </Select>
+        <RootRef rootRef={domRef}>
+          <Select
+            value={getMonth(date)}
+            onChange={handleMonthChange}
+            // MenuProps={{ disablePortal: true }}
+            MenuProps={{ container: domRef.current }}
+          >
+            {generateMonths().map((month, idx) => (
+              <MenuItem key={month} value={idx}>
+                {month}
+              </MenuItem>
+            ))}
+          </Select>
+        </RootRef>
       </Grid>
 
       <Grid item>
