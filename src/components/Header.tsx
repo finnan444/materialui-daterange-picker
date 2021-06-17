@@ -71,7 +71,7 @@ const Header: React.FC<HeaderProps> = props => {
     setDate(setYear(date, parseInt(event.target.value as string)));
   };
 
-  const domRef = React.createRef();
+  const domRef = React.createRef<any>();
 
   const classes = useStyles();
 
