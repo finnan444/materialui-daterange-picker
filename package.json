@@ -1,5 +1,5 @@
 {
-  "version": "0.3.9",
+  "version": "0.4.0",
   "name": "@finnan444/material-ui-daterange-picker",
   "author": "finnan444",
   "description": "A react date range picker implementation using @material-ui.",
