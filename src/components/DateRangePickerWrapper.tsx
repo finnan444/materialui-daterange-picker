@@ -42,40 +42,43 @@ export interface DateRangePickerWrapperProps {
    * `enGB`.
    */
   locale?: Locale;
+
   /**
    * popoverProps applied to main Popover component
    */
   popoverProps?: Partial<PopoverProps>;
+
   /**
    * Text for start toolbar placeholder.
    * @default 'Start'
    */
   startText?: React.ReactNode;
+
   /**
    * Text for end toolbar placeholder.
    * @default 'End'
    */
   endText?: React.ReactNode;
+
   /**
    * Show the outside days.  An outside day is a day falling in the next or the
    * previous month. Default is `false`.
    */
   showOutsideDays?: boolean;
+
   /**
    * Display six weeks per months, regardless the month’s number of weeks.
    * To use this prop, [[showOutsideDays]] must be set. Default to `false`.
    */
-  //TODO
   fixedWeeks?: boolean;
+
   /** The index of the first day of the week (0 - Sunday)
    * @param {0|1|2|3|4|5|6}
    */
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }
 
-const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProps> = (
-  props: DateRangePickerWrapperProps
-) => {
+const DateRangePickerWrapper: React.FC<DateRangePickerWrapperProps> = props => {
   const classes = useStyles();
 
   const { closeOnClickOutside, wrapperClassName, toggle, open } = props;
@@ -99,7 +102,6 @@ const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProp
   return (
     <div className={classes.dateRangePickerContainer}>
       {open && (
-        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div
           className={classes.dateRangeBackdrop}
           onKeyPress={handleKeyPress}

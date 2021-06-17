@@ -1,6 +1,3 @@
-/* eslint-disable no-multi-assign */
-/* eslint-disable no-param-reassign */
-
 import * as React from 'react';
 import {
   addMonths,
@@ -36,13 +33,10 @@ interface DateRangePickerProps {
   popoverProps?: Partial<PopoverProps>;
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   showOutsideDays?: boolean;
+  fixedWeeks?: boolean;
 }
 
-const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
-  props: DateRangePickerProps
-) => {
-  const today = new Date();
-
+const DateRangePicker: React.FC<DateRangePickerProps> = props => {
   const { locale } = props;
 
   const {
@@ -55,7 +49,10 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
     popoverProps,
     weekStartsOn,
     showOutsideDays,
+    fixedWeeks,
   } = props;
+
+  const today = new Date();
 
   const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
   const maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
@@ -183,6 +180,7 @@ const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (
       popoverProps={popoverProps}
       weekStartsOn={weekStartsOn}
       showOutsideDays={showOutsideDays ?? false}
+      fixedWeeks={fixedWeeks ?? false}
     />
   ) : null;
 };

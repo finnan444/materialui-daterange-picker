@@ -1,5 +1,3 @@
-/* eslint-disable radix */
-
 import {
   Grid,
   makeStyles,
@@ -41,15 +39,17 @@ const generateYears = (relativeTo: Date, count: number): number[] => {
     .map((_y, i) => relativeTo.getFullYear() - half + i); // TODO: make part of the state
 };
 
-const Header: React.FunctionComponent<HeaderProps> = ({
-  date,
-  setDate,
-  nextDisabled,
-  prevDisabled,
-  onClickNext,
-  onClickPrevious,
-  locale,
-}: HeaderProps) => {
+const Header: React.FC<HeaderProps> = props => {
+  const {
+    date,
+    setDate,
+    nextDisabled,
+    prevDisabled,
+    onClickNext,
+    onClickPrevious,
+    locale,
+  } = props;
+
   const generateMonths = (): any[] => {
     const months = [];
     for (let i = 0; i < 12; i++) {

@@ -23,6 +23,8 @@ import Day from './Day';
 
 import { DateRange, NavigationAction } from '../types';
 
+const daysInWeek = 7;
+
 const useStyles = makeStyles(() => ({
   root: {
     width: 290,
@@ -49,6 +51,7 @@ interface MonthProps {
   locale: Locale;
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   showOutsideDays: boolean;
+  fixedWeeks: boolean;
   navState: [boolean, boolean];
   setValue: (date: Date) => void;
   helpers: {
@@ -61,9 +64,7 @@ interface MonthProps {
   };
 }
 
-export const Month: React.FunctionComponent<MonthProps> = (
-  props: MonthProps
-) => {
+export const Month: React.FC<MonthProps> = props => {
   const {
     helpers,
     handlers,
@@ -77,9 +78,12 @@ export const Month: React.FunctionComponent<MonthProps> = (
     navState,
     weekStartsOn,
     showOutsideDays,
+    fixedWeeks,
   } = props;
 
   const [back, forward] = navState;
+
+  const weeks = chunks(getDaysInMonth(date, locale, weekStartsOn), daysInWeek);
 
   const classes = useStyles();
 
@@ -109,42 +113,91 @@ export const Month: React.FunctionComponent<MonthProps> = (
           justify="space-between"
           className={classes.daysContainer}
         >
-          {chunks(getDaysInMonth(date, locale, weekStartsOn), 7).map(
-            (week, idx) => (
-              <Grid key={idx} container direction="row" justify="center">
-                {week.map(day => {
-                  const isStart = isStartOfRange(dateRange, day);
-                  const isEnd = isEndOfRange(dateRange, day);
-                  const isRangeOneDay = isRangeSameDay(dateRange);
-                  const highlighted =
-                    inDateRange(dateRange, day) || helpers.inHoverRange(day);
+          {weeks.map((week, idx) => (
+            <Grid key={idx} container direction="row" justify="center">
+              {week.map(day => {
+                const isStart = isStartOfRange(dateRange, day);
+                const isEnd = isEndOfRange(dateRange, day);
+                const isRangeOneDay = isRangeSameDay(dateRange);
+                const highlighted =
+                  inDateRange(dateRange, day) || helpers.inHoverRange(day);
 
+                return (
+                  <Day
+                    key={format(day, 'MM-dd-yyyy')}
+                    filled={isStart || isEnd}
+                    outlined={isToday(day)}
+                    highlighted={highlighted && !isRangeOneDay}
+                    disabled={
+                      !isSameMonth(date, day) ||
+                      !isWithinInterval(day, { start: minDate, end: maxDate })
+                    }
+                    hidden={!showOutsideDays && !isSameMonth(date, day)}
+                    startOfRange={isStart && !isRangeOneDay}
+                    endOfRange={isEnd && !isRangeOneDay}
+                    onClick={() => handlers.onDayClick(day)}
+                    onHover={() => handlers.onDayHover(day)}
+                    value={getDate(day)}
+                  />
+                );
+              })}
+            </Grid>
+          ))}
+          {fixedWeeks &&
+            additionalWeeks(weeks.length).map(week => (
+              <Grid
+                key={randomDate(
+                  new Date(2001, 0, 1),
+                  new Date(2015, 0, 1)
+                ).getTime()}
+                container
+                direction="row"
+                justify="center"
+              >
+                {week.map(day => {
                   return (
                     <Day
                       key={format(day, 'MM-dd-yyyy')}
-                      filled={isStart || isEnd}
-                      outlined={isToday(day)}
-                      highlighted={highlighted && !isRangeOneDay}
-                      disabled={
-                        !isSameMonth(date, day) ||
-                        !isWithinInterval(day, { start: minDate, end: maxDate })
-                      }
-                      hidden={!showOutsideDays && !isSameMonth(date, day)}
-                      startOfRange={isStart && !isRangeOneDay}
-                      endOfRange={isEnd && !isRangeOneDay}
-                      onClick={() => handlers.onDayClick(day)}
-                      onHover={() => handlers.onDayHover(day)}
+                      disabled
+                      hidden
                       value={getDate(day)}
                     />
                   );
                 })}
               </Grid>
-            )
-          )}
+            ))}
         </Grid>
       </Grid>
     </Paper>
   );
+};
+
+function randomDate(start: Date, end: Date): Date {
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  );
+}
+
+const additionalWeeks = (weeksLength: number): Date[][] => {
+  const newWeeks: Date[][] = [];
+  const maxWeeksInMonth = 6;
+  const diff = maxWeeksInMonth - weeksLength;
+
+  if (diff === 0) {
+    return newWeeks;
+  }
+
+  for (let i = 0; i < diff; i++) {
+    const week: Date[] = [];
+    for (let i = 0; i < daysInWeek; i++) {
+      const date = randomDate(new Date(2001, 0, 1), new Date(2015, 0, 1));
+      week.push(date);
+    }
+
+    newWeeks.push(week);
+  }
+
+  return newWeeks;
 };
 
 type WeekDayNamesProps = {
@@ -153,7 +206,7 @@ type WeekDayNamesProps = {
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 };
 
-const WeekDayNames: React.FunctionComponent<WeekDayNamesProps> = props => {
+const WeekDayNames: React.FC<WeekDayNamesProps> = props => {
   const { locale, date, weekStartsOn } = props;
 
   const firstDateOfWeek = startOfWeek(date, {

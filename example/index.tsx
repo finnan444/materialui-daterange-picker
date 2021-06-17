@@ -29,6 +29,7 @@ const App = () => {
         }}
         minDate={minDate}
         showOutsideDays
+        fixedWeeks
       />
     </div>
   );

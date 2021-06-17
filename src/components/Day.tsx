@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
-
 import * as React from 'react';
 import { IconButton, Typography, makeStyles, Theme } from '@material-ui/core';
 import { combine } from '../utils';
@@ -52,7 +50,7 @@ interface DayProps {
   value: number | string;
 }
 
-const Day: React.FunctionComponent<DayProps> = (props: DayProps) => {
+const Day: React.FC<DayProps> = props => {
   const {
     startOfRange,
     endOfRange,

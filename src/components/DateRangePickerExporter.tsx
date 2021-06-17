@@ -6,9 +6,7 @@ import DateRangePickerWrapper, {
 } from './DateRangePickerWrapper';
 import generateClassName from '../generateClassName';
 
-const DateRangePickerExporter: React.FunctionComponent<DateRangePickerWrapperProps> = (
-  props: DateRangePickerWrapperProps
-) => (
+const DateRangePickerExporter: React.FC<DateRangePickerWrapperProps> = props => (
   <StylesProvider generateClassName={generateClassName}>
     <DateRangePickerWrapper {...props} />
   </StylesProvider>
