@@ -20,6 +20,8 @@ yarn add @finnan444/material-ui-daterange-picker
 ```
 
 ## Basic example
+See also **example** directory. You can run it using `npm run start` command.
+
 ```tsx
 import React from "react";
 import { DateRangePicker, DateRange } from '@finnan444/material-ui-daterange-picker';
@@ -35,8 +37,10 @@ const App: React.FC<Props> = props => {
   return (
     <DateRangePicker
       open={open}
-      toggle={toggle}
+      onToggle={toggle}
       onChange={(range) => setDateRange(range)}
+      showOutsideDays
+      fixedWeeks
     />
   );
 }
@@ -46,16 +50,16 @@ export default App;
 
 ## Types
 ```ts
-interface DateRange {
-    startDate?: Date,
-    endDate?: Date
+export interface DateRange {
+    startDate?: Date;
+    endDate?: Date;
 }
 
-interface DefinedRange {
-    label: string,
-    startDate: Date,
-    endDate: Date
-}
+export type DefinedRange = {
+    startDate: Date;
+    endDate: Date;
+    label: string;
+};
 ```
 
 ## Props

@@ -5,6 +5,12 @@ export interface DateRange {
   endDate?: Date;
 }
 
+export type DefinedRange = {
+  startDate: Date;
+  endDate: Date;
+  label: string;
+};
+
 export type Setter<T> =
   | React.Dispatch<React.SetStateAction<T>>
   | ((value: T) => void);
@@ -14,9 +20,3 @@ export enum NavigationAction {
 
   Next = 1,
 }
-
-export type DefinedRange = {
-  startDate: Date;
-  endDate: Date;
-  label: string;
-};
