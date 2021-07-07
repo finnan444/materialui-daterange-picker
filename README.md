@@ -1,6 +1,6 @@
 # Material UI DateRange Picker
 
-A react date range picker implementation using @material-ui.
+A react date range picker implementation using @material-ui and date-fns.
 
 <a href='https://www.npmjs.com/package/@finnan444/material-ui-daterange-picker'>
     <img src='https://img.shields.io/npm/v/@finnan444/material-ui-daterange-picker.svg' alt='Latest npm version'>
