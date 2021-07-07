@@ -1,6 +1,6 @@
 # Material UI DateRange Picker
 
-A react date range picker implementation using @material-ui and date-fns.
+A react date range picker implementation using @material-ui v4 and date-fns.
 
 <a href='https://www.npmjs.com/package/@finnan444/material-ui-daterange-picker'>
     <img src='https://img.shields.io/npm/v/@finnan444/material-ui-daterange-picker.svg' alt='Latest npm version'>
@@ -76,4 +76,7 @@ Name | Type | Required | Default value | Description
 `endText` | `React.ReactNode` | _optional_ | End | Text for end toolbar placeholder.
 `showOutsideDays` | `boolean` | _optional_ | `false` | Show the outside days. An outside day is a day falling in the next or the previous month.
 `fixedWeeks` | `boolean` | _optional_ | `false` | Display six weeks per months, regardless the month’s number of weeks.
-`weekStartsOn` | `Union` | _optional_ | `{0|1|2|3|4|5|6}` | The index of the first day of the week (0 - Sunday).
+`weekStartsOn` | `Union` | _optional_ | [0,1,2,3,4,5,6] | The index of the first day of the week (0 - Sunday).
+
+## Development
+[TSDX](https://tsdx.io/) is used to publish this package.
