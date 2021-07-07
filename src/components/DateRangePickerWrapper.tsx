@@ -19,22 +19,22 @@ const useStyles = makeStyles(() => ({
 
 export interface DateRangePickerWrapperProps {
   open: boolean;
+  onChange: (dateRange: DateRange) => void;
   onToggle?: () => void;
   initialDateRange?: DateRange;
-  definedRanges?: DefinedRange[];
   minDate?: Date;
   maxDate?: Date;
-  onChange: (dateRange: DateRange) => void;
+  definedRanges?: DefinedRange[];
   closeOnClickOutside?: boolean;
   wrapperClassName?: string;
   /**
-   * The date-fns locale object to localize the user interface. Defaults to
-   * `enGB`.
+   * The date-fns locale object to localize the user interface.
+   * @default 'enGB'
    */
   locale?: Locale;
 
   /**
-   * popoverProps applied to main Popover component
+   * PopoverProps applied to main Popover component
    */
   popoverProps?: Partial<PopoverProps>;
 
@@ -51,18 +51,18 @@ export interface DateRangePickerWrapperProps {
   endText?: React.ReactNode;
 
   /**
-   * Show the outside days.  An outside day is a day falling in the next or the
-   * previous month. Default is `false`.
+   * Show the outside days. An outside day is a day falling in the next or the previous month.
+   * @default false
    */
   showOutsideDays?: boolean;
 
   /**
    * Display six weeks per months, regardless the month’s number of weeks.
-   * To use this prop, [[showOutsideDays]] must be set. Default to `false`.
+   * @default false
    */
   fixedWeeks?: boolean;
 
-  /** The index of the first day of the week (0 - Sunday)
+  /** The index of the first day of the week (0 - Sunday).
    * @param {0|1|2|3|4|5|6}
    */
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;

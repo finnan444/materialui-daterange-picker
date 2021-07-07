@@ -62,14 +62,18 @@ interface DefinedRange {
 
 Name | Type | Required | Default value | Description
 :--- | :--- | :--- | :--- | :---
-`onChange` | `(DateRange) => void` | _required_ | - | handler function for providing selected date range
-`toggle` | `() => void` | _required_ | - | function to show / hide the DateRangePicker
-`initialDateRange` | `DateRange` | _optional_ | `{}` | initially selected date range
-`minDate` | `Date` | _optional_ | 10 years ago | min date allowed in range
-`maxDate` | `Date` | _optional_ | 10 years from now | max date allowed in range
-`locale` | `Locale` | _optional_ | enGB | the locale for date calculation
-`definedRanges` | `DefinedRange[]` | _optional_ | - | custom defined ranges to show in the list
-`closeOnClickOutside` | `boolean` | _optional_ | `true` | defines if DateRangePicker will be closed when clicking outside of it
-`wrapperClassName` | `object` | _optional_ | `undefined` | defines additional wrapper style classes
-
-
+`onChange` | `(DateRange) => void` | _required_ | - | Handler function for providing selected date range.
+`onToggle` | `() => void` | _optional_ | - | Handler function to show / hide the DateRangePicker.
+`initialDateRange` | `DateRange` | _optional_ | `{}` | Initially selected date range.
+`minDate` | `Date` | _optional_ | 10 years ago | Min date allowed in range.
+`maxDate` | `Date` | _optional_ | 10 years from now | Max date allowed in range.
+`definedRanges` | `DefinedRange[]` | _optional_ | - | Custom defined ranges to show in the list.
+`closeOnClickOutside` | `boolean` | _optional_ | `true` | Defines if DateRangePicker will be closed when clicking outside of it.
+`wrapperClassName` | `object` | _optional_ | `undefined` | Defines additional wrapper style classes.
+`locale` | `Locale` | _optional_ | enGB | The locale for date calculation.
+`popoverProps` | `Partial<PopoverProps>` | _optional_ | - | PopoverProps applied to main Popover component.
+`startText` | `React.ReactNode` | _optional_ | Start | Text for start toolbar placeholder.
+`endText` | `React.ReactNode` | _optional_ | End | Text for end toolbar placeholder.
+`showOutsideDays` | `boolean` | _optional_ | `false` | Show the outside days. An outside day is a day falling in the next or the previous month.
+`fixedWeeks` | `boolean` | _optional_ | `false` | Display six weeks per months, regardless the month’s number of weeks.
+`weekStartsOn` | `Union` | _optional_ | `{0|1|2|3|4|5|6}` | The index of the first day of the week (0 - Sunday).
