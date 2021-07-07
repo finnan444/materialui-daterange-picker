@@ -10,7 +10,7 @@ type DefinedRangesProps = {
   ranges: DefinedRange[];
 };
 
-const isSameRange = (first: DateRange, second: DateRange) => {
+const isSameRange = (first: DateRange, second: DateRange): boolean => {
   const { startDate: fStart, endDate: fEnd } = first;
   const { startDate: sStart, endDate: sEnd } = second;
   if (fStart && sStart && fEnd && sEnd) {
@@ -19,28 +19,28 @@ const isSameRange = (first: DateRange, second: DateRange) => {
   return false;
 };
 
-const DefinedRanges: React.FunctionComponent<DefinedRangesProps> = ({
-  ranges,
-  setRange,
-  selectedRange,
-}: DefinedRangesProps) => (
-  <List>
-    {ranges.map((range, idx) => (
-      // eslint-disable-next-line react/no-array-index-key
-      <ListItem button key={idx} onClick={() => setRange(range)}>
-        <ListItemText
-          primaryTypographyProps={{
-            variant: 'body2',
-            style: {
-              fontWeight: isSameRange(range, selectedRange) ? 'bold' : 'normal',
-            },
-          }}
-        >
-          {range.label}
-        </ListItemText>
-      </ListItem>
-    ))}
-  </List>
-);
+const DefinedRanges: React.FC<DefinedRangesProps> = props => {
+  const { ranges, setRange, selectedRange } = props;
+  return (
+    <List>
+      {ranges.map((range, idx) => (
+        <ListItem button key={idx} onClick={() => setRange(range)}>
+          <ListItemText
+            primaryTypographyProps={{
+              variant: 'body2',
+              style: {
+                fontWeight: isSameRange(range, selectedRange)
+                  ? 'bold'
+                  : 'normal',
+              },
+            }}
+          >
+            {range.label}
+          </ListItemText>
+        </ListItem>
+      ))}
+    </List>
+  );
+};
 
 export default DefinedRanges;

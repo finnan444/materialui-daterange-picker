@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 import {
   addDays,
   addMonths,
@@ -11,7 +9,6 @@ import {
   startOfWeek,
 } from 'date-fns';
 
-// eslint-disable-next-line no-unused-vars
 import { DefinedRange } from './types';
 
 const getDefaultRanges = (date: Date, locale: Locale): DefinedRange[] => [
@@ -52,6 +49,6 @@ const getDefaultRanges = (date: Date, locale: Locale): DefinedRange[] => [
   },
 ];
 
-export function defaultRanges(locale: Locale) {
+export function defaultRanges(locale: Locale): DefinedRange[] {
   return getDefaultRanges(new Date(), locale);
 }

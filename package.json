@@ -1,11 +1,12 @@
 {
-  "version": "0.3.4",
+  "version": "0.5.4",
   "name": "@finnan444/material-ui-daterange-picker",
   "author": "finnan444",
   "description": "A react date range picker implementation using @material-ui.",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "repository": "https://github.com/finnan444/materialui-daterange-picker",
   "files": [
     "dist",
     "src"
@@ -17,7 +18,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
-    "lint": "tsdx lint --fix",
+    "lint-fix": "tsdx lint --fix",
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why"
@@ -51,13 +52,14 @@
     "@size-limit/preset-small-lib": "^4.11.0",
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
+    "eslint-plugin-react": "^7.24.0",
     "husky": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "size-limit": "^4.11.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.2.0",
-    "typescript": "^4.3.2"
+    "typescript": "^3.9.9"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",

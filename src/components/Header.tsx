@@ -1,16 +1,15 @@
-/* eslint-disable radix */
-
 import {
   Grid,
   makeStyles,
   IconButton,
   Select,
   MenuItem,
+  RootRef,
 } from '@material-ui/core';
 import React from 'react';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
-import { setMonth, getMonth, setYear, getYear } from 'date-fns';
+import { setMonth, getMonth, setYear, getYear, Locale } from 'date-fns';
 
 const useStyles = makeStyles(() => ({
   iconContainer: {
@@ -31,47 +30,51 @@ interface HeaderProps {
   prevDisabled: boolean;
   onClickNext: () => void;
   onClickPrevious: () => void;
+  locale: Locale;
 }
 
-const MONTHS = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'June',
-  'July',
-  'Aug',
-  'Sept',
-  'Oct',
-  'Nov',
-  'Dec',
-];
-
-const generateYears = (relativeTo: Date, count: number) => {
+const generateYears = (relativeTo: Date, count: number): number[] => {
   const half = Math.floor(count / 2);
   return Array(count)
     .fill(0)
     .map((_y, i) => relativeTo.getFullYear() - half + i); // TODO: make part of the state
 };
 
-const Header: React.FunctionComponent<HeaderProps> = ({
-  date,
-  setDate,
-  nextDisabled,
-  prevDisabled,
-  onClickNext,
-  onClickPrevious,
-}: HeaderProps) => {
-  const classes = useStyles();
+const Header: React.FC<HeaderProps> = props => {
+  const {
+    date,
+    setDate,
+    nextDisabled,
+    prevDisabled,
+    onClickNext,
+    onClickPrevious,
+    locale,
+  } = props;
 
-  const handleMonthChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const generateMonths = (): any[] => {
+    const months = [];
+    for (let i = 0; i < 12; i++) {
+      months.push(locale.localize?.month(i, { width: 'abbreviated' }));
+    }
+
+    return months;
+  };
+
+  const handleMonthChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ): void => {
     setDate(setMonth(date, parseInt(event.target.value as string)));
   };
-
-  const handleYearChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleYearChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ): void => {
     setDate(setYear(date, parseInt(event.target.value as string)));
   };
+
+  const monthSelectRef = React.createRef<any>();
+  const yearSelectRef = React.createRef<any>();
+
+  const classes = useStyles();
 
   return (
     <Grid container justify="space-between" alignItems="center">
@@ -85,33 +88,35 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         </IconButton>
       </Grid>
       <Grid item>
-        <Select
-          value={getMonth(date)}
-          onChange={handleMonthChange}
-          MenuProps={{ disablePortal: true }}
-        >
-          {MONTHS.map((month, idx) => (
-            <MenuItem key={month} value={idx}>
-              {month}
-            </MenuItem>
-          ))}
-        </Select>
+        <RootRef rootRef={monthSelectRef}>
+          <Select
+            value={getMonth(date)}
+            onChange={handleMonthChange}
+            MenuProps={{ container: monthSelectRef.current }}
+          >
+            {generateMonths().map((month, idx) => (
+              <MenuItem key={month} value={idx}>
+                {month}
+              </MenuItem>
+            ))}
+          </Select>
+        </RootRef>
       </Grid>
 
       <Grid item>
-        <Select
-          value={getYear(date)}
-          onChange={handleYearChange}
-          MenuProps={{ disablePortal: true }}
-        >
-          {generateYears(date, 30).map(year => (
-            <MenuItem key={year} value={year}>
-              {year}
-            </MenuItem>
-          ))}
-        </Select>
-
-        {/* <Typography>{format(date, "MMMM yyyy")}</Typography> */}
+        <RootRef rootRef={yearSelectRef}>
+          <Select
+            value={getYear(date)}
+            onChange={handleYearChange}
+            MenuProps={{ container: yearSelectRef.current }}
+          >
+            {generateYears(date, 30).map(year => (
+              <MenuItem key={year} value={year}>
+                {year}
+              </MenuItem>
+            ))}
+          </Select>
+        </RootRef>
       </Grid>
       <Grid item className={classes.iconContainer}>
         <IconButton

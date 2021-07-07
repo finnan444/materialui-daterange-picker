@@ -26,7 +26,7 @@ import { DateRangePicker, DateRange } from '@finnan444/material-ui-daterange-pic
 
 type Props = {}
 
-const App: React.FunctionComponent<Props> = props => {
+const App: React.FC<Props> = props => {
   const [open, setOpen] = React.useState(false);
   const [dateRange, setDateRange] = React.useState<DateRange>({});
 
