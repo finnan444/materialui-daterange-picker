@@ -1,6 +1,6 @@
 {
   "name": "@finnan444/material-ui-daterange-picker",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "A react date range picker implementation using @material-ui v4 and date-fns.",
   "keywords": [
     "date",
