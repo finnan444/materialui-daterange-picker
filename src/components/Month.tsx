@@ -110,11 +110,11 @@ export const Month: React.FC<MonthProps> = props => {
           item
           container
           direction="column"
-          justify="space-between"
+          justifyContent="space-between"
           className={classes.daysContainer}
         >
           {weeks.map((week, idx) => (
-            <Grid key={idx} container direction="row" justify="center">
+            <Grid key={idx} container direction="row" justifyContent="center">
               {week.map(day => {
                 const isStart = isStartOfRange(dateRange, day);
                 const isEnd = isEndOfRange(dateRange, day);
@@ -152,7 +152,7 @@ export const Month: React.FC<MonthProps> = props => {
                 ).getTime()}
                 container
                 direction="row"
-                justify="center"
+                justifyContent="center"
               >
                 {week.map(day => {
                   return (
@@ -224,7 +224,7 @@ const WeekDayNames: React.FC<WeekDayNamesProps> = props => {
       item
       container
       direction="row"
-      justify="space-between"
+      justifyContent="space-between"
       className={classes.weekDaysContainer}
     >
       {shortWeekDaysArray.map(day => (

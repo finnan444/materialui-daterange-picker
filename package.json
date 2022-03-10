@@ -1,30 +1,38 @@
 {
-  "version": "0.5.7",
   "name": "@finnan444/material-ui-daterange-picker",
-  "author": "finnan444",
+  "version": "0.5.7",
   "description": "A react date range picker implementation using @material-ui v4 and date-fns.",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "keywords": [
+    "date",
+    "range",
+    "picker",
+    "date-range",
+    "date-range-picker",
+    "daterangepicker",
+    "material",
+    "material-ui",
+    "material design",
+    "react",
+    "typescript"
+  ],
   "repository": "https://github.com/finnan444/materialui-daterange-picker",
+  "license": "MIT",
+  "author": "finnan444",
+  "main": "dist/index.js",
+  "module": "dist/material-ui-daterange-picker.esm.js",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
   ],
-  "engines": {
-    "node": ">=10"
-  },
   "scripts": {
-    "start": "tsdx watch",
+    "analyze": "size-limit --why",
     "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
     "lint-fix": "tsdx lint --fix",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
-  },
-  "peerDependencies": {
-    "react": ">=16"
+    "start": "tsdx watch",
+    "test": "tsdx test --passWithNoTests"
   },
   "husky": {
     "hooks": {
@@ -37,17 +45,12 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "module": "dist/material-ui-daterange-picker.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/material-ui-daterange-picker.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/material-ui-daterange-picker.esm.js",
-      "limit": "10 KB"
-    }
-  ],
+  "dependencies": {
+    "@material-ui/core": "4.12.3",
+    "@material-ui/icons": "4.11.2",
+    "classnames": "^2.3.1",
+    "date-fns": "^2.22.0"
+  },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.11.0",
     "@types/react": "^17.0.8",
@@ -61,23 +64,20 @@
     "tslib": "^2.2.0",
     "typescript": "^3.9.9"
   },
-  "dependencies": {
-    "@material-ui/core": "^4.11.4",
-    "@material-ui/icons": "^4.11.2",
-    "classnames": "^2.3.1",
-    "date-fns": "^2.22.0"
+  "peerDependencies": {
+    "react": ">=16"
   },
-  "keywords": [
-    "date",
-    "range",
-    "picker",
-    "date-range",
-    "date-range-picker",
-    "daterangepicker",
-    "material",
-    "material-ui",
-    "material design",
-    "react",
-    "typescript"
+  "engines": {
+    "node": ">=10"
+  },
+  "size-limit": [
+    {
+      "path": "dist/material-ui-daterange-picker.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/material-ui-daterange-picker.esm.js",
+      "limit": "10 KB"
+    }
   ]
 }

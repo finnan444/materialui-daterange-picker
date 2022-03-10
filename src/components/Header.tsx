@@ -4,7 +4,6 @@ import {
   IconButton,
   Select,
   MenuItem,
-  RootRef,
 } from '@material-ui/core';
 import React from 'react';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
@@ -77,7 +76,7 @@ const Header: React.FC<HeaderProps> = props => {
   const classes = useStyles();
 
   return (
-    <Grid container justify="space-between" alignItems="center">
+    <Grid container justifyContent="space-between" alignItems="center">
       <Grid item className={classes.iconContainer}>
         <IconButton
           className={classes.icon}
@@ -88,35 +87,33 @@ const Header: React.FC<HeaderProps> = props => {
         </IconButton>
       </Grid>
       <Grid item>
-        <RootRef rootRef={monthSelectRef}>
-          <Select
-            value={getMonth(date)}
-            onChange={handleMonthChange}
-            MenuProps={{ container: monthSelectRef.current }}
-          >
-            {generateMonths().map((month, idx) => (
-              <MenuItem key={month} value={idx}>
-                {month}
-              </MenuItem>
-            ))}
-          </Select>
-        </RootRef>
+        <Select
+          value={getMonth(date)}
+          onChange={handleMonthChange}
+          MenuProps={{ container: monthSelectRef.current }}
+          ref={monthSelectRef}
+        >
+          {generateMonths().map((month, idx) => (
+            <MenuItem key={month} value={idx}>
+              {month}
+            </MenuItem>
+          ))}
+        </Select>
       </Grid>
 
       <Grid item>
-        <RootRef rootRef={yearSelectRef}>
-          <Select
-            value={getYear(date)}
-            onChange={handleYearChange}
-            MenuProps={{ container: yearSelectRef.current }}
-          >
-            {generateYears(date, 30).map(year => (
-              <MenuItem key={year} value={year}>
-                {year}
-              </MenuItem>
-            ))}
-          </Select>
-        </RootRef>
+        <Select
+          value={getYear(date)}
+          onChange={handleYearChange}
+          MenuProps={{ container: yearSelectRef.current }}
+          ref={yearSelectRef}
+        >
+          {generateYears(date, 30).map(year => (
+            <MenuItem key={year} value={year}>
+              {year}
+            </MenuItem>
+          ))}
+        </Select>
       </Grid>
       <Grid item className={classes.iconContainer}>
         <IconButton

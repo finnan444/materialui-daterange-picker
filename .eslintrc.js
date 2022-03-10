@@ -17,6 +17,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-use-before-define": "off",
     "no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": ["error", { "ignoreRestArgs": false, fixToUnknown: false }],
     "@typescript-eslint/no-empty-function": ["error"],
     "@typescript-eslint/no-use-before-define": ["error"],
     "@typescript-eslint/explicit-function-return-type": [
