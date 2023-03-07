@@ -18,7 +18,7 @@ import {
 
 import { DateRange } from './types';
 
-export const identity = <T>(x: T) => x;
+export const identity = <T>(x: T): any => x;
 
 export const chunks = <T>(array: ReadonlyArray<T>, size: number): T[][] =>
   Array.from({ length: Math.ceil(array.length / size) }, (_v, i) =>

@@ -1,19 +1,14 @@
 {
   "name": "example",
   "version": "1.0.0",
-  "browserslist": "> 0.5%, last 2 versions, not dead",
   "license": "MIT",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "start": "parcel index.html"
   },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {
     "react-app-polyfill": "^1.0.0"
-  },
-  "alias": {
-    "react": "../node_modules/react",
-    "react-dom": "../node_modules/react-dom/profiling",
-    "scheduler/tracing": "../node_modules/scheduler/tracing-profiling"
   },
   "devDependencies": {
     "@parcel/config-default": "^2.3.2",
@@ -22,5 +17,10 @@
     "@types/react-dom": "^16.8.4",
     "parcel": "^2.3.2",
     "typescript": "^3.4.5"
+  },
+  "alias": {
+    "react": "../node_modules/react",
+    "react-dom": "../node_modules/react-dom/profiling",
+    "scheduler/tracing": "../node_modules/scheduler/tracing-profiling"
   }
 }

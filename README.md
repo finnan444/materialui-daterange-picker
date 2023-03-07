@@ -1,4 +1,4 @@
-# Material UI DateRange Picker
+# Material UI (v4) DateRange Picker
 
 A react date range picker implementation using @material-ui v4 and date-fns.
 
