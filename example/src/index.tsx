@@ -1,16 +1,15 @@
-import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { DateRangeCard } from './components/DateRangeCard';
 import { Button, Popper } from '@material-ui/core';
-import { useRef, useState } from 'react';
+import React from 'react';
 
 const App: React.FC = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const handleToggle = (): void => setOpen(prevOpen => !prevOpen);
   const handleClose = (): void => setOpen(false);
 
-  const buttonAnchorRef = useRef<HTMLButtonElement>(null);
+  const buttonAnchorRef = React.useRef<HTMLButtonElement>(null);
 
   return (
     <React.Fragment>
