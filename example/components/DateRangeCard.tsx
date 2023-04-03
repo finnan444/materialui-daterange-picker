@@ -22,7 +22,7 @@ export const DateRangeCard: React.FC<DateRangeCardProps> = ({ onClose }) => {
       <DateRangePickerWrapper
         open
         onToggle={onClose}
-        closeOnClickOutside={false}
+        closeOnClickOutside
         onChange={handleRangeSelect}
         popoverProps={{
           elevation: 0,
