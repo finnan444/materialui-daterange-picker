@@ -1,7 +1,7 @@
 import { Button, Card, CardActions } from '@material-ui/core';
 import * as React from 'react';
-import { DateRange } from '../../src';
-import DateRangePickerWrapper from '../../src/components/DateRangePickerWrapper';
+import { DateRange } from '../../../src';
+import DateRangePickerWrapper from '../../../src/components/DateRangePickerWrapper';
 
 type DateRangeCardProps = {
   onClose: () => void;
