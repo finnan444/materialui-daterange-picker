@@ -26,7 +26,6 @@
     "src"
   ],
   "scripts": {
-    "analyze": "size-limit --why",
     "build": "tsdx build",
     "lint-fix": "tsdx lint --fix",
     "prepare": "tsdx build",
@@ -52,17 +51,17 @@
     "date-fns": "^2.22.0"
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^4.11.0",
+    "@size-limit/preset-big-lib": "^8.2.4",
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
-    "eslint-plugin-react": "^7.24.0",
-    "husky": "^6.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "size-limit": "^4.11.0",
+    "size-limit": "^8.2.4",
     "tsdx": "^0.14.1",
-    "tslib": "^2.2.0",
-    "typescript": "4.8.4"
+    "tslib": "^2.5.0",
+    "typescript": "4.9.5"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -72,12 +71,10 @@
   },
   "size-limit": [
     {
-      "path": "dist/material-ui-daterange-picker.cjs.production.min.js",
-      "limit": "10 KB"
+      "path": "dist/material-ui-daterange-picker.cjs.production.min.js"
     },
     {
-      "path": "dist/material-ui-daterange-picker.esm.js",
-      "limit": "10 KB"
+      "path": "dist/material-ui-daterange-picker.esm.js"
     }
   ]
 }
