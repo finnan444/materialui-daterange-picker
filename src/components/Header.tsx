@@ -10,18 +10,6 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import { setMonth, getMonth, setYear, getYear, Locale } from 'date-fns';
 
-const useStyles = makeStyles(() => ({
-  iconContainer: {
-    padding: 5,
-  },
-  icon: {
-    padding: 10,
-    '&:hover': {
-      background: 'none',
-    },
-  },
-}));
-
 type HeaderProps = {
   date: Date;
   setDate: (date: Date) => void;
@@ -30,13 +18,6 @@ type HeaderProps = {
   onClickNext: () => void;
   onClickPrevious: () => void;
   locale: Locale;
-};
-
-const generateYears = (relativeTo: Date, count: number) => {
-  const half = Math.floor(count / 2);
-  return Array(count)
-    .fill(0)
-    .map((_y, i) => relativeTo.getFullYear() - half + i); // TODO: make part of the state
 };
 
 const Header: React.FC<HeaderProps> = props => {
@@ -50,15 +31,6 @@ const Header: React.FC<HeaderProps> = props => {
     locale,
   } = props;
 
-  const generateMonths = () => {
-    const months = [];
-    for (let i = 0; i < 12; i++) {
-      months.push(locale.localize?.month(i, { width: 'abbreviated' }));
-    }
-
-    return months;
-  };
-
   const handleMonthChange = (
     event: React.ChangeEvent<{ value: unknown }>
   ): void => {
@@ -70,6 +42,7 @@ const Header: React.FC<HeaderProps> = props => {
     setDate(setYear(date, parseInt(event.target.value as string)));
   };
 
+  // TODO any type
   const monthSelectRef = React.createRef<any>();
   const yearSelectRef = React.createRef<any>();
 
@@ -93,7 +66,7 @@ const Header: React.FC<HeaderProps> = props => {
           MenuProps={{ container: monthSelectRef.current }}
           ref={monthSelectRef}
         >
-          {generateMonths().map((month, idx) => (
+          {generateMonths(locale).map((month, idx) => (
             <MenuItem key={month} value={idx}>
               {month}
             </MenuItem>
@@ -108,7 +81,7 @@ const Header: React.FC<HeaderProps> = props => {
           MenuProps={{ container: yearSelectRef.current }}
           ref={yearSelectRef}
         >
-          {generateYears(date, 30).map(year => (
+          {generateYears(date).map(year => (
             <MenuItem key={year} value={year}>
               {year}
             </MenuItem>
@@ -127,5 +100,35 @@ const Header: React.FC<HeaderProps> = props => {
     </Grid>
   );
 };
+
+const YEAR_COUNT = 30;
+
+const generateYears = (relativeTo: Date) => {
+  const half = Math.floor(YEAR_COUNT / 2);
+  return Array(YEAR_COUNT)
+    .fill(0)
+    .map((_y, i) => relativeTo.getFullYear() - half + i); // TODO: make part of the state
+};
+
+const generateMonths = (locale: Locale) => {
+  const months = [];
+  for (let i = 0; i < 12; i++) {
+    months.push(locale.localize?.month(i, { width: 'abbreviated' }));
+  }
+
+  return months;
+};
+
+const useStyles = makeStyles(() => ({
+  iconContainer: {
+    padding: 5,
+  },
+  icon: {
+    padding: 10,
+    '&:hover': {
+      background: 'none',
+    },
+  },
+}));
 
 export default Header;

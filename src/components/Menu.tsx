@@ -94,9 +94,6 @@ const Menu: React.FC<MenuProps> = props => {
     handlers,
   };
 
-  // TODO
-  const headerDateFormat = 'MMMM dd, yyyy';
-
   const classes = useStyles();
 
   return (
@@ -107,7 +104,7 @@ const Menu: React.FC<MenuProps> = props => {
             <Grid item className={classes.headerItem}>
               <Typography variant="subtitle1">
                 {startDate
-                  ? format(startDate, headerDateFormat)
+                  ? format(startDate, HEADER_DATE_FORMAT)
                   : startText ?? 'Start'}
               </Typography>
             </Grid>
@@ -116,7 +113,9 @@ const Menu: React.FC<MenuProps> = props => {
             </Grid>
             <Grid item className={classes.headerItem}>
               <Typography variant="subtitle1">
-                {endDate ? format(endDate, headerDateFormat) : endText ?? 'End'}
+                {endDate
+                  ? format(endDate, HEADER_DATE_FORMAT)
+                  : endText ?? 'End'}
               </Typography>
             </Grid>
           </Grid>
@@ -159,5 +158,7 @@ const Menu: React.FC<MenuProps> = props => {
     </Paper>
   );
 };
+
+const HEADER_DATE_FORMAT = 'MMMM dd, yyyy';
 
 export default Menu;
