@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface HeaderProps {
+type HeaderProps = {
   date: Date;
   setDate: (date: Date) => void;
   nextDisabled: boolean;
@@ -30,9 +30,9 @@ interface HeaderProps {
   onClickNext: () => void;
   onClickPrevious: () => void;
   locale: Locale;
-}
+};
 
-const generateYears = (relativeTo: Date, count: number): number[] => {
+const generateYears = (relativeTo: Date, count: number) => {
   const half = Math.floor(count / 2);
   return Array(count)
     .fill(0)
@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = props => {
     locale,
   } = props;
 
-  const generateMonths = (): any[] => {
+  const generateMonths = () => {
     const months = [];
     for (let i = 0; i < 12; i++) {
       months.push(locale.localize?.month(i, { width: 'abbreviated' }));

@@ -17,6 +17,7 @@ import {
   isEndOfRange,
   isRangeSameDay,
   isStartOfRange,
+  randomDate,
 } from '../utils';
 import Header from './Header';
 import Day from './Day';
@@ -25,24 +26,7 @@ import { DateRange, NavigationAction } from '../types';
 
 const daysInWeek = 7;
 
-const useStyles = makeStyles(() => ({
-  root: {
-    width: 290,
-  },
-  weekDaysContainer: {
-    marginTop: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
-  },
-  daysContainer: {
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginTop: 15,
-    marginBottom: 20,
-  },
-}));
-
-interface MonthProps {
+type MonthProps = {
   value: Date;
   marker: symbol;
   dateRange: DateRange;
@@ -52,7 +36,7 @@ interface MonthProps {
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   showOutsideDays: boolean;
   fixedWeeks: boolean;
-  navState: [boolean, boolean];
+  navState: { back: boolean; forward: boolean };
   setValue: (date: Date) => void;
   helpers: {
     inHoverRange: (day: Date) => boolean;
@@ -62,7 +46,7 @@ interface MonthProps {
     onDayHover: (day: Date) => void;
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
-}
+};
 
 export const Month: React.FC<MonthProps> = props => {
   const {
@@ -81,7 +65,7 @@ export const Month: React.FC<MonthProps> = props => {
     fixedWeeks,
   } = props;
 
-  const [back, forward] = navState;
+  const { back, forward } = navState;
 
   const weeks = chunks(getDaysInMonth(date, locale, weekStartsOn), daysInWeek);
 
@@ -172,12 +156,6 @@ export const Month: React.FC<MonthProps> = props => {
   );
 };
 
-function randomDate(start: Date, end: Date): Date {
-  return new Date(
-    start.getTime() + Math.random() * (end.getTime() - start.getTime())
-  );
-}
-
 const additionalWeeks = (weeksLength: number): Date[][] => {
   const newWeeks: Date[][] = [];
   const maxWeeksInMonth = 6;
@@ -235,3 +213,20 @@ const WeekDayNames: React.FC<WeekDayNamesProps> = props => {
     </Grid>
   );
 };
+
+const useStyles = makeStyles(() => ({
+  root: {
+    width: 290,
+  },
+  weekDaysContainer: {
+    marginTop: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+  },
+  daysContainer: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    marginTop: 15,
+    marginBottom: 20,
+  },
+}));

@@ -18,15 +18,14 @@ import {
 
 import { DateRange } from './types';
 
-export const identity = <T>(x: T): any => x;
+export const identity = <T>(x: T) => x;
 
 export const chunks = <T>(array: ReadonlyArray<T>, size: number): T[][] =>
   Array.from({ length: Math.ceil(array.length / size) }, (_v, i) =>
     array.slice(i * size, i * size + size)
   );
 
-export const combine = (...args: any[]): string =>
-  args.filter(identity).join(' ');
+export const combine = (...args: any[]) => args.filter(identity).join(' ');
 
 export const getDaysInMonth = (
   date: Date,
@@ -43,10 +42,10 @@ export const getDaysInMonth = (
   return days;
 };
 
-export const isStartOfRange = ({ startDate }: DateRange, day: Date): boolean =>
+export const isStartOfRange = ({ startDate }: DateRange, day: Date) =>
   (startDate && isSameDay(day, startDate)) as boolean;
 
-export const isEndOfRange = ({ endDate }: DateRange, day: Date): boolean =>
+export const isEndOfRange = ({ endDate }: DateRange, day: Date) =>
   (endDate && isSameDay(day, endDate)) as boolean;
 
 export const inDateRange = (
@@ -59,7 +58,7 @@ export const inDateRange = (
       isSameDay(day, startDate) ||
       isSameDay(day, endDate))) as boolean;
 
-export const isRangeSameDay = ({ startDate, endDate }: DateRange): boolean => {
+export const isRangeSameDay = ({ startDate, endDate }: DateRange) => {
   if (startDate && endDate) {
     return isSameDay(startDate, endDate);
   }
@@ -68,10 +67,7 @@ export const isRangeSameDay = ({ startDate, endDate }: DateRange): boolean => {
 
 type Falsy = false | null | undefined | 0 | '';
 
-export const parseOptionalDate = (
-  date: Date | Falsy,
-  defaultValue: Date
-): Date => {
+export const parseOptionalDate = (date: Date | Falsy, defaultValue: Date) => {
   if (date) {
     const parsed = toDate(date);
     if (isValid(parsed)) return parsed;
@@ -79,11 +75,11 @@ export const parseOptionalDate = (
   return defaultValue;
 };
 
-export const getValidatedMonths = (
+export function getValidatedMonths(
   range: DateRange,
   minDate: Date,
   maxDate: Date
-): [Date | undefined, Date | undefined] => {
+) {
   const { startDate, endDate } = range;
   if (startDate && endDate) {
     const newStart = max([startDate, minDate]);
@@ -94,5 +90,12 @@ export const getValidatedMonths = (
       isSameMonth(newStart, newEnd) ? addMonths(newStart, 1) : newEnd,
     ];
   }
+
   return [startDate, endDate];
-};
+}
+
+export function randomDate(start: Date, end: Date): Date {
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  );
+}

@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface MenuProps {
+type MenuProps = {
   dateRange: DateRange;
   ranges: DefinedRange[];
   minDate: Date;
@@ -59,7 +59,7 @@ interface MenuProps {
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   showOutsideDays: boolean;
   fixedWeeks: boolean;
-}
+};
 
 const Menu: React.FC<MenuProps> = props => {
   const {
@@ -127,7 +127,7 @@ const Menu: React.FC<MenuProps> = props => {
               value={firstMonth}
               locale={locale}
               setValue={setFirstMonth}
-              navState={[true, canNavigateCloser]}
+              navState={{ back: false, forward: canNavigateCloser }}
               marker={MARKERS.FIRST_MONTH}
               weekStartsOn={weekStartsOn}
               showOutsideDays={showOutsideDays}
@@ -139,7 +139,7 @@ const Menu: React.FC<MenuProps> = props => {
               value={secondMonth}
               locale={locale}
               setValue={setSecondMonth}
-              navState={[canNavigateCloser, true]}
+              navState={{ back: canNavigateCloser, forward: true }}
               marker={MARKERS.SECOND_MONTH}
               weekStartsOn={weekStartsOn}
               showOutsideDays={showOutsideDays}

@@ -20,12 +20,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": ["error", { "ignoreRestArgs": false, fixToUnknown: false }],
     "@typescript-eslint/no-empty-function": ["error"],
     "@typescript-eslint/no-use-before-define": ["error"],
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        "allowExpressions": true
-      }
-    ],
+    "@typescript-eslint/explicit-function-return-type": "off",
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
     'react/jsx-key': 'error',
