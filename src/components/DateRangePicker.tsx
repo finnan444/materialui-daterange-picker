@@ -22,7 +22,7 @@ import { defaultRanges } from '../defaults';
 import Menu, { Marker, MARKERS } from './Menu';
 import { PopoverProps } from '@material-ui/core';
 
-interface DateRangePickerProps {
+type DateRangePickerProps = {
   open: boolean;
   initialDateRange?: DateRange;
   definedRanges?: DefinedRange[];
@@ -34,7 +34,7 @@ interface DateRangePickerProps {
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   showOutsideDays?: boolean;
   fixedWeeks?: boolean;
-}
+};
 
 const DateRangePicker: React.FC<DateRangePickerProps> = props => {
   const { locale } = props;

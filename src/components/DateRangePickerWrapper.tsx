@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export interface DateRangePickerWrapperProps {
+export type DateRangePickerWrapperProps = {
   open: boolean;
   onChange: (dateRange: DateRange) => void;
   onToggle?: () => void;
@@ -66,7 +66,7 @@ export interface DateRangePickerWrapperProps {
    * @param {0|1|2|3|4|5|6}
    */
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
-}
+};
 
 const DateRangePickerWrapper: React.FC<DateRangePickerWrapperProps> = props => {
   const classes = useStyles();

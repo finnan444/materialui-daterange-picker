@@ -1,9 +1,9 @@
 import React from 'react';
 
-export interface DateRange {
+export type DateRange = {
   startDate?: Date;
   endDate?: Date;
-}
+};
 
 export type DefinedRange = {
   startDate: Date;
